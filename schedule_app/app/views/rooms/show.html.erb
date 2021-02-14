@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Building:</strong>
+  <%= @room.building %>
+</p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @room.number %>
+</p>
+
+<p>
+  <strong> cap:</strong>
+  <%= @room. cap %>
+</p>
+
+<p>
+  <strong>Comp avail:</strong>
+  <%= @room.comp_avail %>
+</p>
+
+<p>
+  <strong>Seat avail:</strong>
+  <%= @room.seat_avail %>
+</p>
+
+<p>
+  <strong>Seat type:</strong>
+  <%= @room.seat_type %>
+</p>
+
+<p>
+  <strong>Food:</strong>
+  <%= @room.food %>
+</p>
+
+<p>
+  <strong>Dept:</strong>
+  <%= @room.dept %>
+</p>
+
+<p>
+  <strong>Room type:</strong>
+  <%= @room.room_type %>
+</p>
+
+<%= link_to 'Edit', edit_room_path(@room) %> |
+<%= link_to 'Back', rooms_path %>
