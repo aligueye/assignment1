@@ -56,6 +56,11 @@ class RoomsController < ApplicationController
     end
   end
 
+  def import
+    Room.import(params[:file])
+    redirect_to rooms_path, notice: "Rooms imported successfully"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_room
@@ -64,6 +69,6 @@ class RoomsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def room_params
-      params.require(:room).permit(:building, :number, : cap, :comp_avail, :seat_avail, :seat_type, :food, :dept, :room_type)
+      params.require(:room).permit(:building, :number, :cap, :comp_avail, :seat_avail, :seat_type, :food, :dept, :room_type)
     end
 end

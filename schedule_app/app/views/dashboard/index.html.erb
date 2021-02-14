@@ -1,3 +1,7 @@
 <h1> Scheduling App </h1>
 <h4>Import your data!</h4>
-    
+<%= form_tag import_rooms_path, multipart: true do %> 
+<h1>yoo</h1>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Upload Rooms" %>
+<% end %>
