@@ -3,5 +3,10 @@
 <%= form_tag import_rooms_path, multipart: true do %> 
 <h1>yoo</h1>
     <%= file_field_tag :file %>
+    <%
+=begin%>
+ <%= file_field_tag :file %> 
+<%
+=end%>
     <%= submit_tag "Upload Rooms" %>
 <% end %>

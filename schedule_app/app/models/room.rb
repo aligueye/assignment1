@@ -18,7 +18,8 @@ class Room < ApplicationRecord
                 "seat_type" => row[5],
                 "food" => row[6],
                 "dept" => row[7],
-                "room_type" => row[8]
+                "room_type" => row[8],
+                # "schedules_id" => row[0]+row[1]
             ]
             self.create! room_data
         end

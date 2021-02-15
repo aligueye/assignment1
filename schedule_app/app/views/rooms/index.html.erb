@@ -40,4 +40,8 @@
 
 <br>
 
-<%= link_to 'New Room', new_room_path %>
+<%= form_tag('../schedules/import', multipart: true) do %> 
+<h1>yoo</h1>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Upload Schedules" %>
+<% end %>

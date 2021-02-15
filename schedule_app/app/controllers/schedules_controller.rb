@@ -56,6 +56,11 @@ class SchedulesController < ApplicationController
     end
   end
 
+  def import
+    Room.import(params[:file])
+    redirect_to schedules_path, notice: "Schedules imported successfully"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_schedule
