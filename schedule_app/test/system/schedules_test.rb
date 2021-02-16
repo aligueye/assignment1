@@ -19,7 +19,7 @@ class SchedulesTest < ApplicationSystemTestCase
     fill_in "Date", with: @schedule.date
     fill_in "Number", with: @schedule.number
     fill_in "Time", with: @schedule.time
-    fill_in "Type", with: @schedule.type
+    fill_in "Booking Type", with: @schedule.booking_type
     click_on "Create Schedule"
 
     assert_text "Schedule was successfully created"
@@ -35,7 +35,7 @@ class SchedulesTest < ApplicationSystemTestCase
     fill_in "Date", with: @schedule.date
     fill_in "Number", with: @schedule.number
     fill_in "Time", with: @schedule.time
-    fill_in "Type", with: @schedule.type
+    fill_in "Booking type", with: @schedule.booking_type
     click_on "Update Schedule"
 
     assert_text "Schedule was successfully updated"

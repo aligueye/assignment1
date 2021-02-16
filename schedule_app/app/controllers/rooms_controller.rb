@@ -61,6 +61,11 @@ class RoomsController < ApplicationController
     redirect_to rooms_path, notice: "Rooms imported successfully"
   end
 
+  def search
+    availible = Room.find([4,7])
+    redirect_to schedules_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_room

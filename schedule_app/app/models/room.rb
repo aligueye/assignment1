@@ -4,11 +4,21 @@ class Room < ApplicationRecord
     def self.import(file)
 
         CSV.foreach(file.path, headers: true) do |row|
-            # format csv to acceptable hash, my vars
-            # room_data = row.to_h
-            # room_data[:building] = room_data.delete :Building
-            # room_data[:number] = room_data.delete :Room
-            
+           
+            # Assigns Computer Availible variable bool
+            if row[3] == "Yes"
+                row[3] = true
+            else
+                row[3] = false
+            end
+
+            # Assigns Food variable bool
+            if row[6] == "Yes"
+                row[6] = true
+            else
+                row[6] = false
+            end
+
             room_data = Hash[ 
                 "building" => row[0],
                 "number" => row[1],
@@ -18,10 +28,11 @@ class Room < ApplicationRecord
                 "seat_type" => row[5],
                 "food" => row[6],
                 "dept" => row[7],
-                "room_type" => row[8],
-                # "schedules_id" => row[0]+row[1]
+                "room_type" => row[8]
             ]
+
             self.create! room_data
         end
     end
+
 end

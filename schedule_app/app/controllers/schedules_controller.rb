@@ -57,7 +57,7 @@ class SchedulesController < ApplicationController
   end
 
   def import
-    Room.import(params[:file])
+    Schedule.import(params[:file])
     redirect_to schedules_path, notice: "Schedules imported successfully"
   end
 

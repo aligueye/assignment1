@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<%= link_to "Home", root_path %>
+
 <h1>Rooms</h1>
 
 <table>
@@ -40,8 +42,8 @@
 
 <br>
 
-<%= form_tag('../schedules/import', multipart: true) do %> 
-<h1>yoo</h1>
+<%= form_tag(import_schedules_path, :multipart => true) do %> 
+<h1>Upload Schedules then return home to search!</h1>
     <%= file_field_tag :file %>
     <%= submit_tag "Upload Schedules" %>
 <% end %>
