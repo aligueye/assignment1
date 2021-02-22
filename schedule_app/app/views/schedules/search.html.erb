@@ -1,0 +1,42 @@
+<%= link_to "Return home and search again!", root_path %>
+
+<% if @avail_rooms.blank? %>
+<p>There are no rooms availble within you search</p>
+<% else %>
+
+<p>Suggested Schedule</p>
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Building</th>
+      <th>Number</th>
+      <th>Capacity</th>
+      <th>Computers Available</th>
+      <th>Food Allowed</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @avail_rooms.each do |sched| %>
+      <tr>
+        
+        <td><%= sched.date %></td>
+        <td><%= sched.time %></td>
+        <td><%= sched.building %></td>
+        <td><%= sched.number %></td>
+        <td><%= sched.cap %></td>
+        <td><%= sched.comp_avail %></td>
+        <td><%= sched.food %></td>
+        <td><%= link_to 'Show', sched %></td>
+        <td><%= link_to 'Edit', edit_schedule_path(sched) %></td>
+        <td><%= link_to 'Destroy', sched, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+
+<br>

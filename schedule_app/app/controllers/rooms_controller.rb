@@ -56,14 +56,16 @@ class RoomsController < ApplicationController
     end
   end
 
+  # POST /rooms/import(.:format) redirects to index
   def import
     Room.import(params[:file])
     redirect_to rooms_path, notice: "Rooms imported successfully"
   end
 
+  # GET /rooms/search(.:format) search_rooms
   def search
-    availible = Room.find([4,7])
-    redirect_to schedules_path
+    @avail_room = Schedule.find([4,7])
+    # redirect_to schedules_path
   end
 
   private

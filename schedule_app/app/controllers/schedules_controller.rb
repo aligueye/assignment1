@@ -61,6 +61,11 @@ class SchedulesController < ApplicationController
     redirect_to schedules_path, notice: "Schedules imported successfully"
   end
 
+  def search
+    @avail_rooms = Schedule.find([4,7])
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_schedule
