@@ -62,8 +62,51 @@ class SchedulesController < ApplicationController
   end
 
   def search
-    @avail_rooms = Schedule.find([4,7])
+    '''
+    Search reqs:
 
+      Find Conference room Begining and end 
+      Meal every six hours
+      60% of cap eats
+      10% of cap will not have computers
+
+    '''
+    avail_rooms_id = []
+    i = 1
+    start_date_time = Time.parse(params[:date] + " " + params[:start])
+    end_date_time = start_date_time + (60 * 60 * Integer(params[:length]))
+    curr_date_time = start_date_time + (60 * 60)
+
+    # Finds and adds conference to desired schedule id's
+    conf_room = Schedule.where("cap > ? and time = ? and date = ?", 
+                               params[:capacity], 
+                               params[:start], 
+                               params[:date]
+                               ).ids.first
+
+    avail_rooms_id << conf_room
+
+    while(curr_date_time != end_date_time - (60 * 60)) do
+      
+      
+      
+      i += 1
+      curr_date_time += (60 * 60)
+    end
+
+    # Finds and adds final room to desired schedule id's
+    final_room = Schedule.where("cap > ? and time = ? and date = ?",
+                                params[:capacity],
+                                end_date_time.strftime('%I:00 %p'),
+                                end_date_time.strftime('%F')
+                                ).ids.first
+                              
+    avail_rooms_id << final_room
+
+    # Checks if rooms were found and assigns them to instance variable
+    if avail_rooms_id.empty? == false
+      @avail_rooms = Schedule.find(avail_rooms_id)
+    end
   end
 
   private

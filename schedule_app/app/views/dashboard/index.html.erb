@@ -15,16 +15,19 @@
     <h1>Search available rooms here</h1>
     
     <%= label_tag "Date: " %> 
-    <%= date_field_tag "date" %><br>
+    <%= date_field_tag "date", :required => true %><br>
 
     <%= label_tag "Start: " %>
-    <%= time_field_tag "start" %><br>
+    <input type="text" id="start" name="start"
+           pattern="\b((1[0-2]|0?[1-9]):([0][0]) ([AaPp][Mm]))"
+           value="12:00 AM"
+           ><br>
 
     <%= label_tag "Length: " %>
-    <%= number_field_tag "length", :step => 0.5 %><br> 
+    <%= number_field_tag "length", :required %><br> 
 
     <%= label_tag "Capacity: " %>
-    <%= number_field_tag "capacity" %><br>
+    <%= number_field_tag "capacity", :required => true %><br>
 
     <%= submit_tag "Search" %>
 <% end %>
