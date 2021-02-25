@@ -17,6 +17,7 @@ class SchedulesController < ApplicationController
 
   # GET /schedules/1/edit
   def edit
+    session[:return_to] ||= request.referer
   end
 
   # POST /schedules or /schedules.json
@@ -36,6 +37,9 @@ class SchedulesController < ApplicationController
 
   # PATCH/PUT /schedules/1 or /schedules/1.json
   def update
+
+    redirect_to session.delete(:return_to)
+
     respond_to do |format|
       if @schedule.update(schedule_params)
         format.html { redirect_to @schedule, notice: "Schedule was successfully updated." }
@@ -71,14 +75,17 @@ class SchedulesController < ApplicationController
       10% of cap will not have computers
 
     '''
+
     avail_rooms_id = []
     i = 1
     start_date_time = Time.parse(params[:date] + " " + params[:start])
     end_date_time = start_date_time + (60 * 60 * Integer(params[:length]))
     curr_date_time = start_date_time + (60 * 60)
+    meal_room_cap = Integer(params[:capacity]) * 6/10
+    comp_room_cap = Integer(params[:capacity]) * 1/10
 
     # Finds and adds conference to desired schedule id's
-    conf_room = Schedule.where("cap > ? and time = ? and date = ?", 
+    conf_room = Schedule.where("cap > ? and time = ? and date = ? and avail = true", 
                                params[:capacity], 
                                params[:start], 
                                params[:date]
@@ -87,6 +94,33 @@ class SchedulesController < ApplicationController
     avail_rooms_id << conf_room
 
     while(curr_date_time != end_date_time - (60 * 60)) do
+      
+      curr_hour = curr_date_time.strftime('%I:%M %p')
+      curr_date = curr_date_time.strftime('%F')
+      
+      # If i % 6, find room to eat with 60% of participants 
+      if i % 6 == 0
+
+        meal_room = Schedule.where("cap > ? and time = ? and date = ? and food = true and avail = true",
+                                   meal_room_cap,
+                                   curr_hour,
+                                   curr_date
+                                   ).ids.first
+
+        avail_rooms_id << meal_room
+
+      # else find room with computers to support 10% of participants
+      else
+
+        comp_room = Schedule.where("cap > ? and time = ? and date = ? and comp_avail = true and avail = true",
+                                   comp_room_cap,
+                                   curr_hour,
+                                   curr_date
+                                  ).ids.first
+                                
+        avail_rooms_id << comp_room
+        
+      end
       
       
       
