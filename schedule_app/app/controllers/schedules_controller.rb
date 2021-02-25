@@ -8,6 +8,7 @@ class SchedulesController < ApplicationController
 
   # GET /schedules/1 or /schedules/1.json
   def show
+    session[:return_to] ||= request.referer
   end
 
   # GET /schedules/new
@@ -38,11 +39,11 @@ class SchedulesController < ApplicationController
   # PATCH/PUT /schedules/1 or /schedules/1.json
   def update
 
-    redirect_to session.delete(:return_to)
+    # redirect_to @schedule
 
     respond_to do |format|
       if @schedule.update(schedule_params)
-        format.html { redirect_to @schedule, notice: "Schedule was successfully updated." }
+        format.html { redirect_to session.delete(:return_to), notice: "Schedule was successfully updated." }
         format.json { render :show, status: :ok, location: @schedule }
       else
         format.html { render :edit, status: :unprocessable_entity }
