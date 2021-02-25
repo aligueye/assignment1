@@ -39,8 +39,6 @@ class SchedulesController < ApplicationController
   # PATCH/PUT /schedules/1 or /schedules/1.json
   def update
 
-    # redirect_to @schedule
-
     respond_to do |format|
       if @schedule.update(schedule_params)
         format.html { redirect_to session.delete(:return_to), notice: "Schedule was successfully updated." }
@@ -61,19 +59,19 @@ class SchedulesController < ApplicationController
     end
   end
 
+  # POST imports schedules from csv
   def import
     Schedule.import(params[:file])
     redirect_to schedules_path, notice: "Schedules imported successfully"
   end
 
+  # GET searches for available rooms matching Hackathon requirements
   def search
     '''
-    Search reqs:
-
-      Find Conference room Begining and end 
-      Meal every six hours
-      60% of cap eats
-      10% of cap will not have computers
+    param: date - string
+    param: start - string
+    param: capacity - string
+    param: length - string
 
     '''
 
@@ -123,8 +121,7 @@ class SchedulesController < ApplicationController
         
       end
       
-      
-      
+      # Increments iteration, date, and time
       i += 1
       curr_date_time += (60 * 60)
     end
