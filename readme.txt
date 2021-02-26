@@ -10,6 +10,6 @@ Instructions:
     Follow prompts
 
 Issues: 
-    Cannot search for rooms
+    No reserve rooms feature, rather individually change room if available
     
 
